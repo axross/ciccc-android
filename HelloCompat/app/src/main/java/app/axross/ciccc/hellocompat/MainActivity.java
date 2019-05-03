@@ -1,9 +1,15 @@
 package app.axross.ciccc.hellocompat;
 
+import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private TextView helloTextView;
@@ -15,10 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
         helloTextView = findViewById(R.id.hello_textview);
 
-        helloTextView.setOnClickListener((View view) -> onChangeColorButtonClick(view));
+        Button changeColorButton = findViewById(R.id.color_button);
+        changeColorButton.setOnClickListener((View view) -> onChangeColorButtonClick());
 
         if (savedInstanceState != null) {
-            helloTextView.setTextColor(savedInstanceState.getInt("color"));
+            helloTextView.setTextColor(savedInstanceState.getInt("text_color"));
         }
     }
 
@@ -26,10 +33,16 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt("color", helloTextView.getCurrentTextColor());
+        outState.putInt("text_color", helloTextView.getCurrentTextColor());
     }
 
-    void onChangeColorButtonClick(View view) {
+    private void onChangeColorButtonClick() {
+        Random random = new Random();
 
+        int[] colors = getResources().getIntArray(R.array.text_colors);
+
+        int color = colors[random.nextInt(colors.length)];
+
+        helloTextView.setTextColor(color);
     }
 }
