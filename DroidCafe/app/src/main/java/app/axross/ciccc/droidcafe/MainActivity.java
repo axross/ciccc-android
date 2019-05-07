@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        findViewById(R.id.donut).setOnClickListener((view) -> onDonutClick(view));
+        findViewById(R.id.ice_cream).setOnClickListener((view) -> onIceCreamClick(view));
+        findViewById(R.id.froyo).setOnClickListener((view) -> onFroyoClick(view));
     }
 
     @Override
@@ -48,5 +53,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onDonutClick(View view) {
+        displayToast(getString(R.string.donut_order_message));
+    }
+
+    private void onIceCreamClick(View view) {
+        displayToast(getString(R.string.ice_cream_order_message));
+    }
+
+    private void onFroyoClick(View view) {
+        displayToast(getString(R.string.froyo_order_message));
+    }
+
+    public void displayToast(String message) {
+        Toast.makeText(
+            getApplicationContext(),
+            message,
+            Toast.LENGTH_SHORT
+        ).show();
     }
 }
