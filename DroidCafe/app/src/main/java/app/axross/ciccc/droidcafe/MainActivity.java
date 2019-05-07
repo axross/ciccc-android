@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    String orderMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
-
-                startActivity(intent);
-            }
-        });
-
+        findViewById(R.id.fab).setOnClickListener((view) -> onFabClick(view));
         findViewById(R.id.donut).setOnClickListener((view) -> onDonutClick(view));
         findViewById(R.id.ice_cream).setOnClickListener((view) -> onIceCreamClick(view));
         findViewById(R.id.froyo).setOnClickListener((view) -> onFroyoClick(view));
@@ -57,19 +49,38 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void onFabClick(View view) {
+        Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+
+        intent.putExtra(EXTRA_MESSAGE, orderMessage);
+
+        startActivity(intent);
+    }
+
     private void onDonutClick(View view) {
-        displayToast(getString(R.string.donut_order_message), view);
+        String message = getString(R.string.donut_order_message);
+
+        orderMessage = message;
+        displayToast(message, view);
     }
 
     private void onIceCreamClick(View view) {
-        displayToast(getString(R.string.ice_cream_order_message), view);
+        String message = getString(R.string.ice_cream_order_message);
+
+        orderMessage = message;
+        displayToast(message, view);
     }
 
     private void onFroyoClick(View view) {
-        displayToast(getString(R.string.froyo_order_message), view);
+        String message = getString(R.string.froyo_order_message);
+
+        orderMessage = message;
+        displayToast(message, view);
     }
 
     public void displayToast(String message, View view) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
+
+    public static final String EXTRA_MESSAGE = "com.example.android.droidcafe.extra.MESSAGE";
 }
