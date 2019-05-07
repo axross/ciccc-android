@@ -21,6 +21,8 @@ public class OrderActivity extends AppCompatActivity {
         ((RadioButton) findViewById(R.id.sameday)).setOnClickListener((view) -> onRadioButtonClick(view));
         ((RadioButton) findViewById(R.id.nextday)).setOnClickListener((view) -> onRadioButtonClick(view));
         ((RadioButton) findViewById(R.id.pickup)).setOnClickListener((view) -> onRadioButtonClick(view));
+
+        ((RadioButton) findViewById(R.id.nextday)).setChecked(true);
     }
 
     private void onRadioButtonClick(View view) {
