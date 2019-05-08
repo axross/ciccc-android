@@ -16,18 +16,21 @@
     <item
         android:id="@+id/action_order"
         android:orderInCategory="10"
+        android:icon="@drawable/ic_shopping_cart"
         android:title="Order"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_status"
         android:orderInCategory="20"
+        android:icon="@drawable/ic_status_info"
         android:title="Status"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_favorites"
         android:orderInCategory="30"
+        android:icon="@drawable/ic_favorite"
         android:title="Favorites"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>
