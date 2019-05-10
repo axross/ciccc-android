@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private final LinkedList<String> words = new LinkedList<>();
+    private LinkedList<String> words;
 
     private RecyclerView recyclerView;
 
@@ -25,20 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (int i = 0; i < 20; i++) {
-            words.addLast("Word " + i);
-        }
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
-
         recyclerView = findViewById(R.id.recycler_view);
-        adapter = new WordListAdapter(this, words);
-        recyclerView.setAdapter(adapter);
+        setRecyclerViewAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -57,7 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_reset) {
+            setRecyclerViewAdapter();
+
             return true;
         }
 
@@ -70,5 +66,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         words.addLast("+ Word " + wordListSize);
         recyclerView.getAdapter().notifyItemInserted(wordListSize);
         recyclerView.smoothScrollToPosition(wordListSize);
+    }
+
+    void setRecyclerViewAdapter() {
+        words = createWords();
+        adapter = new WordListAdapter(this, words);
+        recyclerView.setAdapter(adapter);
+    }
+
+    static LinkedList<String> createWords() {
+        LinkedList<String> words = new LinkedList<>();
+
+        for (int i = 0; i < 20; i++) {
+            words.addLast("Word " + i);
+        }
+
+        return words;
     }
 }
