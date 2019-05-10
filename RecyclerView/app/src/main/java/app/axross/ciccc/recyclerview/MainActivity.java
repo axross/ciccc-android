@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import java.util.LinkedList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final LinkedList<String> words = new LinkedList<>();
 
     private RecyclerView recyclerView;
@@ -33,13 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(this);
+
 
         recyclerView = findViewById(R.id.recycler_view);
         adapter = new WordListAdapter(this, words);
@@ -67,5 +62,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int wordListSize = words.size();
+        words.addLast("+ Word " + wordListSize);
+        recyclerView.getAdapter().notifyItemInserted(wordListSize);
+        recyclerView.smoothScrollToPosition(wordListSize);
     }
 }
