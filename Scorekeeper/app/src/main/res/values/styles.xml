@@ -8,4 +8,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ScoreButton" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">@dimen/button_size</item>
+        <item name="android:layout_height">@dimen/button_size</item>
+        <item name="android:background">@drawable/button_background</item>
+    </style>
+
+    <style name="ScoreIncreaseButton" parent="ScoreButton">
+        <item name="android:src">@drawable/ic_add</item>
+        <item name="android:contentDescription">@string/score_increase_button_description</item>
+    </style>
+
+    <style name="ScoreDecreaseButton" parent="ScoreButton">
+        <item name="android:src">@drawable/ic_subtract</item>
+        <item name="android:contentDescription">@string/score_decrease_button_description</item>
+    </style>
+
+    <style name="ScoreText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textSize">32sp</item>
+    </style>
 </resources>

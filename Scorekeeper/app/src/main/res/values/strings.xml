@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Scorekeeper</string>
+    <string name="score_increase_button_description">Plus 1</string>
+    <string name="score_decrease_button_description">Minus 1</string>
 </resources>
