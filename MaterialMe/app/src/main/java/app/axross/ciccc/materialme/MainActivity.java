@@ -1,5 +1,6 @@
 package app.axross.ciccc.materialme;
 
+import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,11 +30,12 @@ public class MainActivity extends AppCompatActivity {
     private void initializeData() {
         String[] sportTitles = getResources().getStringArray(R.array.sports_titles);
         String[] sportInfos = getResources().getStringArray(R.array.sports_info);
+        TypedArray sportImageIds = getResources().obtainTypedArray(R.array.sports_images);
 
         sports.clear();
 
         for (int i = 0; i < sportTitles.length; i++) {
-            sports.add(new Sport(sportTitles[i], sportInfos[i]));
+            sports.add(new Sport(sportTitles[i], sportInfos[i], sportImageIds.getResourceId(i, 0)));
         }
 
         adapter.notifyDataSetChanged();

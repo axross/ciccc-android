@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -35,20 +38,23 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.ViewHolder> 
         return sports.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
         private TextView infoTextView;
+        private ImageView imageView;
 
         private ViewHolder(View itemView) {
             super(itemView);
 
-            titleTextView = itemView.findViewById(R.id.title);
-            infoTextView = itemView.findViewById(R.id.subTitle);
+            titleTextView = itemView.findViewById(R.id.sport_title);
+            infoTextView = itemView.findViewById(R.id.sport_sub_title);
+            imageView = itemView.findViewById(R.id.sport_image);
         }
 
         private void bindTo(Sport currentSport){
             titleTextView.setText(currentSport.getTitle());
             infoTextView.setText(currentSport.getInfo());
+            Glide.with(context).load(currentSport.getImageResource()).into(imageView);
         }
     }
 }
