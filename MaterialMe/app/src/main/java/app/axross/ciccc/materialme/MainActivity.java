@@ -1,11 +1,13 @@
 package app.axross.ciccc.materialme;
 
 import android.content.res.TypedArray;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         sports = new ArrayList<>();
@@ -48,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initializeData();
+            }
+        });
     }
 
     private void initializeData() {
