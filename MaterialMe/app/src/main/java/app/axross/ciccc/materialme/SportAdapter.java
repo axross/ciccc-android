@@ -1,6 +1,7 @@
 package app.axross.ciccc.materialme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.ViewHolder> 
         return sports.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView titleTextView;
         private TextView infoTextView;
         private ImageView imageView;
@@ -49,12 +50,25 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.ViewHolder> 
             titleTextView = itemView.findViewById(R.id.sport_title);
             infoTextView = itemView.findViewById(R.id.sport_sub_title);
             imageView = itemView.findViewById(R.id.sport_image);
+
+            itemView.setOnClickListener(this);
         }
 
         private void bindTo(Sport currentSport){
             titleTextView.setText(currentSport.getTitle());
             infoTextView.setText(currentSport.getInfo());
             Glide.with(context).load(currentSport.getImageResource()).into(imageView);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Sport sport = sports.get(getAdapterPosition());
+
+            Intent detailIntent = new Intent(context, DetailActivity.class);
+            detailIntent.putExtra("title", sport.getTitle());
+            detailIntent.putExtra("image_resource", sport.getImageResource());
+
+            context.startActivity(detailIntent);
         }
     }
 }
