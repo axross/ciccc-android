@@ -4,6 +4,7 @@ import android.content.res.TypedArray;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -21,16 +22,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final int gridColumnCount = getResources().getInteger(R.integer.grid_column_count);
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, gridColumnCount));
 
         sports = new ArrayList<>();
         adapter = new SportAdapter(this, sports);
         recyclerView.setAdapter(adapter);
 
-        initializeData();
+        int swipeDirections;
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        if(gridColumnCount > 1){
+            swipeDirections = 0;
+        } else {
+            swipeDirections = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+        }
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP, swipeDirections) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 int from = viewHolder.getAdapterPosition();
@@ -58,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
                 initializeData();
             }
         });
+
+        initializeData();
     }
 
     private void initializeData() {

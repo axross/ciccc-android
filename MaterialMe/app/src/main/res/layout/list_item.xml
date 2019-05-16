@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/sport_title"
-            style="@style/TextAppearance.AppCompat.Headline"
+            style="@style/SportsTitle"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/sport_news_title"
-            style="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/SportsDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/sport_title"
@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/sport_sub_title"
-            style="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/SportsDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/sport_news_title"
